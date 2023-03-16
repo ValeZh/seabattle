@@ -421,6 +421,7 @@ int random_ship(int k, Ship* ship)
     return k;
 };
 
+
 int put_opponent_ship(string& params, Ship* ship)
 {
     // obrabot params
@@ -469,6 +470,21 @@ int put_opponent_ship(string& params, Ship* ship)
     if (x >= 0 && y >= 0)
         ship->set_first_paluba(x, y);
     return 0;
+}
+
+
+
+void empty_board()
+{
+    for (int k = 0; k < 10; k++)
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            battlefield[k][i] = ',';
+            battlefield2[k][i] = ',';
+            battlefield_oppon[k][i] = ',';
+        }
+    }
 }
 
 void clean_board()
@@ -530,6 +546,40 @@ bool xy_validate(char alf, int y)
     return false;
 };
 
+int id_validate(int armysize)
+{
+    int k;
+    while (true)
+    {
+        cout << "Write id of ship" << endl;
+        cin >> k;
+        if (k <= armysize && k > 0)
+        {
+            k = k - 1;
+            return k;
+        };
+        cout << "invalid" << endl;
+    }
+};
+
+void validate_for_set(Ship* ships, int k)
+{
+    int y;
+    int x;
+    char alf;
+    cout << "Write x y for " << ships->label() << " " << k << endl;
+
+    do
+    {
+        cin >> alf;
+        cin >> y;
+    } while (xy_validate(alf, y) == false);
+    x = alf - 97;
+    y--;
+    ships->set_first_paluba(x, y);
+};
+
+
 
 /////////////////////////////////////////////////////////////
 
@@ -561,15 +611,7 @@ int main()
     oposite_ships[4] = new Type_3(HORISONTAL);
 
 
-    for (int k = 0; k < 10; k++)
-    {
-        for (int i = 0; i < 10; i++)
-        {
-            battlefield[k][i] = ',';
-            battlefield2[k][i] = ',';
-            battlefield_oppon[k][i] = ',';
-        }
-    }
+    empty_board();
 
     printboard();
     int y, x;
@@ -590,16 +632,7 @@ int main()
         {
             for (int i = 0; i < army_size; i++)
             {
-                cout << "Write x y for " << ships[i]->label() << endl;
-                while (true)
-                {
-                    cin >> alf;
-                    cin >> y;
-                    xy_validate(alf, y);
-                }
-                x = alf - 97;
-                y--;
-                ships[i]->set_first_paluba(x, y);
+                validate_for_set(ships[i],i);
             }
             for (int i = 0; i < army_size; i++)
             {
@@ -631,15 +664,8 @@ int main()
             system("CLS");
             printboard();
             clean_board();
-            cout << "Write id of ship" << endl;
-            cin >> k;
-            k = k - 1;
-            cout << "Write x y for " << ships[k]->label() << endl;
-            cin >> alf;
-            x = alf - 97;
-            cin >> y;
-            y--;
-            ships[k]->set_first_paluba(x, y);
+            k = id_validate(army_size);
+            validate_for_set(ships[k],k);
 
             for (int i = 0; i < army_size; i++)
             {
@@ -649,9 +675,7 @@ int main()
         if (answer == "rotate")
         {
             system("CLS");
-            cout << "Write id of ship" << endl;
-            cin >> k;
-            k = k - 1;
+            k = id_validate(army_size);
             ships[k]->rotate();
             clean_board();
             for (int i = 0; i < army_size; i++)
@@ -666,10 +690,10 @@ int main()
             {
                 cout << "Share ship nomber" << i + 1 << endl;
                 cout << ships[i]->share_ship() << endl;
-                char c = 0;
                 wait_enter();
             }
         }
+
         if (answer == "start")
         {
             cout << "If you want put random opponent  -------- 'random'" << endl;
@@ -765,12 +789,7 @@ int main()
             }
             cout << "-------" << end_ship << endl;
             char c = 0;
-            while (true)
-            {
-                c = getch();
-                if (c == 13)
-                    break;
-            }
+            wait_enter();
             system("CLS");
 
         } while (end_ship != 0);
@@ -843,12 +862,7 @@ int main()
                 cout << "-------" << end_ship << endl;
                 char c = 0;
 
-                while (true)
-                {
-                    c = getch();
-                    if (c == 13)
-                        break;
-                }
+                wait_enter();
 
                 system("CLS");
             }
@@ -909,12 +923,7 @@ int main()
                 cout << "-------" << end_ship << endl;
                 char c = 0;
                 player = 1;
-                while (true)
-                {
-                    c = getch();
-                    if (c == 13)
-                        break;
-                }
+                wait_enter();
                 system("CLS");
             }
         } while (end_ship != 0);
