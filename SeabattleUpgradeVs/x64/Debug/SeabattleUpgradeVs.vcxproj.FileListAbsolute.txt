@@ -1,0 +1,3 @@
+d:\WinUsers\Lera\Documents\seabattle\SeabattleUpgradeVs\x64\Debug\SeabattleUpgradeVs.exe.lastcodeanalysissucceeded
+d:\WinUsers\Lera\Documents\seabattle\SeabattleUpgradeVs\x64\Debug\NativeCodeAnalysis.read.1.tlog
+d:\WinUsers\Lera\Documents\seabattle\SeabattleUpgradeVs\x64\Debug\SeabattleUpgradeVs.exe
