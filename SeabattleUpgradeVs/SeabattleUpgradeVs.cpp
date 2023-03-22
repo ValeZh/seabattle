@@ -9,6 +9,7 @@
 #include <conio.h>
 #include <fstream>
 #include <time.h>
+#include <list>
 
 //#define _CRTDBG_MAP_ALLOC
 //#include <stdlib.h>
@@ -369,8 +370,9 @@ bool validate(int x, int y)
 
 
 
-int put_ship(int k, Ship* ship)
+int put_ship(Ship* ship)
 {
+ 
     Paluba* pl = ship->first_paluba();
     bool valide = true;
     while (pl) {
@@ -391,12 +393,15 @@ int put_ship(int k, Ship* ship)
         battlefield[pl->x][pl->y] = ship->id() + '0';
         pl = ship->next_paluba();
     }
-
+    
+ 
+    
     return ship->id();
 }
 
-int random_ship(int k, Ship* ship)
+int random_ship(Ship* ship)
 {
+
     time_t t;
     int x, y, direct;
     srand((unsigned)time(&t));
@@ -417,13 +422,17 @@ int random_ship(int k, Ship* ship)
 
         ship->set_first_paluba(x, y);
 
-    } while (put_ship(k, ship) != ship->id());
-    return k;
+    } while (put_ship(ship) != ship->id());
+    
+    
+    
+    return 1;
 };
 
 
 int put_opponent_ship(string& params, Ship* ship)
 {
+   
     // obrabot params
     // x:8,y:6,r:2
     // -->
@@ -433,7 +442,7 @@ int put_opponent_ship(string& params, Ship* ship)
     // value = 8
     // ...
     int x = -1, y = -1;
-    size_t curr_pos = 0;
+    size_t curr_pos = 0;//тип отвечающий за размер обьекта
     size_t pos = std::string::npos;
 
     while (true) {
@@ -469,6 +478,7 @@ int put_opponent_ship(string& params, Ship* ship)
 
     if (x >= 0 && y >= 0)
         ship->set_first_paluba(x, y);
+    
     return 0;
 }
 
@@ -546,7 +556,7 @@ bool xy_validate(char alf, int y)
     return false;
 };
 
-int id_validate(int armysize)
+int id_input(int armysize)
 {
     int k;
     while (true)
@@ -562,12 +572,13 @@ int id_validate(int armysize)
     }
 };
 
-void validate_for_set(Ship* ships, int k)
+void validate_for_set(Ship* ships)
 {
+    
     int y;
     int x;
     char alf;
-    cout << "Write x y for " << ships->label() << " " << k << endl;
+    cout << "Write x y for " << ships->label() << " " << ships->id() << endl;
 
     do
     {
@@ -577,8 +588,18 @@ void validate_for_set(Ship* ships, int k)
     x = alf - 97;
     y--;
     ships->set_first_paluba(x, y);
-};
+    
+}
 
+void play_validate(char alf, int y)
+{
+    do
+    {
+        cin >> alf;
+        cin >> y;
+    } while (xy_validate(alf, y) == false);
+
+}
 
 
 /////////////////////////////////////////////////////////////
@@ -590,65 +611,93 @@ void validate_for_set(Ship* ships, int k)
 
 int main()
 {
-
+    
     const int army_size = 5;
     string answer;
     char alf;
     // Create ships;
-
-    Ship* ships[army_size];
-    ships[0] = new Type_1(VERTICAL);
-    ships[1] = new Type_1(HORISONTAL);
-    ships[2] = new Type_2(VERTICAL);
-    ships[3] = new Type_2(HORISONTAL);
-    ships[4] = new Type_3(HORISONTAL);
-
-    Ship* oposite_ships[army_size];
-    oposite_ships[0] = new Type_1(VERTICAL);
-    oposite_ships[1] = new Type_1(HORISONTAL);
-    oposite_ships[2] = new Type_2(VERTICAL);
-    oposite_ships[3] = new Type_2(HORISONTAL);
-    oposite_ships[4] = new Type_3(HORISONTAL);
+    
+    list<Ship*> ships;
+    ships.push_back(new Type_1(VERTICAL));
+    ships.push_back(new Type_1(HORISONTAL));
+    ships.push_back(new Type_2(VERTICAL));
+    ships.push_back(new Type_2(HORISONTAL));
+    ships.push_back(new Type_3(HORISONTAL));
 
 
+    //Ship* ships[army_size];
+    //ships[0] = new Type_1(VERTICAL);
+    //ships[1] = new Type_1(HORISONTAL);
+    //ships[2] = new Type_2(VERTICAL);
+    //ships[3] = new Type_2(HORISONTAL);
+    //ships[4] = new Type_3(HORISONTAL);
+    
+    //Ship* oposite_ships[army_size];
+    //oposite_ships[0] = new Type_1(VERTICAL);
+    //oposite_ships[1] = new Type_1(HORISONTAL);
+    //oposite_ships[2] = new Type_2(VERTICAL);
+    //oposite_ships[3] = new Type_2(HORISONTAL);
+    //oposite_ships[4] = new Type_3(HORISONTAL);
+    
+    
+    list<Ship*> oposite_ships;
+    oposite_ships.push_back(new Type_1(VERTICAL));
+    oposite_ships.push_back(new Type_1(HORISONTAL));
+    oposite_ships.push_back(new Type_2(VERTICAL));
+    oposite_ships.push_back(new Type_2(HORISONTAL));
+    oposite_ships.push_back(new Type_3(HORISONTAL));
+    
     empty_board();
-
+    
     printboard();
     int y, x;
+    
     while (true)
     {
+        
         cout << "If you want put ship random -------- 'random'" << endl;
         cout << "If you want put ship by using coordinate -------- 'coord'" << endl;
         cin >> answer;
         if (answer == "random")
         {
-            for (int i = 0; i < army_size; i++)
+            list<Ship*>::iterator itr = ships.begin();//итератор = функция начало обЪекта списка ships
+            list<Ship*>::iterator end = ships.end();
+
+            for (;itr != end; itr++)
             {
-                random_ship(i, ships[i]);
+                random_ship( *itr );
             }
             break;
         }
         if (answer == "coord")
         {
-            for (int i = 0; i < army_size; i++)
+            list<Ship*>::iterator itr = ships.begin();
+            list<Ship*>::iterator end = ships.end();
+
+            for (; itr != end; itr++)
             {
-                validate_for_set(ships[i],i);
+                validate_for_set(*itr);
             }
-            for (int i = 0; i < army_size; i++)
+            for (; itr != end; itr++)
             {
-                put_ship(i, ships[i]);
+                put_ship(*itr);
             }
             break;
         }
     }
     system("CLS");
+    
+    
+    
+    list<Ship*>::iterator itr = ships.begin();
+    list<Ship*>::iterator end = ships.end();
 
-
-    for (int i = 0; i < army_size; i++)
+    for (; itr != end; itr++)
     {
-        cout << ships[i]->serialize() << endl;
+        cout <<(*itr)->serialize() << endl;
     }
 
+    
     while (true)
     {
         printboard();
@@ -661,35 +710,44 @@ int main()
         cin >> answer;
         if (answer == "put")
         {
+            list<Ship*>::iterator itr = ships.begin();
+            list<Ship*>::iterator end = ships.end();
             system("CLS");
             printboard();
             clean_board();
-            k = id_validate(army_size);
-            validate_for_set(ships[k],k);
+            k = id_input(army_size);
+            for (; (*itr)->id() == k; itr++);
+            validate_for_set(*itr);
+            itr = ships.begin();
 
-            for (int i = 0; i < army_size; i++)
+            for (; itr != end; itr++)
             {
-                put_ship(i, ships[i]);
+                put_ship(*itr);
             }
         }
         if (answer == "rotate")
         {
+            list<Ship*>::iterator itr = ships.begin();
+            list<Ship*>::iterator end = ships.end();
             system("CLS");
-            k = id_validate(army_size);
-            ships[k]->rotate();
+            k = id_input(army_size);
+            for (; (*itr)->id() == k; itr++);
+            (*itr)->rotate();
             clean_board();
-            for (int i = 0; i < army_size; i++)
+            for (; itr != end; itr++)
             {
-                put_ship(i, ships[i]);
+                put_ship(*itr);
             }
             printboard();
         }
         if (answer == "share")
         {
-            for (int i = 0; i < army_size; i++)
+            list<Ship*>::iterator itr = ships.begin();
+            list<Ship*>::iterator end = ships.end();
+            for (; itr != end; itr++)
             {
-                cout << "Share ship nomber" << i + 1 << endl;
-                cout << ships[i]->share_ship() << endl;
+                cout << "Share ship nomber" << (*itr)->id() << endl;
+                cout << (*itr)->share_ship() << endl;
                 wait_enter();
             }
         }
@@ -699,27 +757,32 @@ int main()
             cout << "If you want put random opponent  -------- 'random'" << endl;
             cout << "If you want set opponent  -------- 'set'" << endl;
             cin >> answer;
+            
             if (answer == "set")
             {
                 cout << "Set opponent" << endl;
                 clean_board();
-                for (int i = 0; i < army_size; i++)
+                list<Ship*>::iterator itr = oposite_ships.begin();
+                list<Ship*>::iterator end = oposite_ships.end();
+                for (; itr != end; itr++)
                 {
-                    cout << "put ship nomber  " << i + 1 << endl;
+                    cout << "put ship nomber  " << (*itr)->id() << endl;
                     string share;
                     cin >> share;
-                    put_opponent_ship(share, oposite_ships[i]);
+                    put_opponent_ship(share, *itr);
                 }
                 clean_board();
-                for (int i = 0; i < army_size; i++)
+ 
+                for (; itr != end; itr++)
                 {
-                    put_ship(i, ships[i]);
+                    put_ship(*itr);
                 }
                 break;
             }
             if (answer == "random")
             {
                 clean_board();
+                /* TODO
                 for (int i = 0; i < army_size; i++)
                 {
                     random_ship(i, oposite_ships[i]);
@@ -729,11 +792,12 @@ int main()
                 {
                     put_ship(i, ships[i]);
                 }
+                */
             }
             break;
         }
     }
-
+    
     system("CLS");
     cout << "If you want play with 2 computers  -------- 'two'" << endl;
     cout << "If you want play with 1 computer -------- 'one'" << endl;
@@ -751,15 +815,11 @@ int main()
             end_ship = 0;
             int shoot = 0;
             cout << "Break ship.Write x y for " << endl;
-            while (true)
-            {
-                cin >> alf;
-                cin >> y;
-                if (y > 0 && y < 11 && alf > 96 && alf < 107)
-                {
-                    break;
-                }
-            };
+            
+            cin >> alf;
+            cin >> y;
+            
+            xy_validate(alf, y);
 
             x = alf - 97;
             x;
@@ -767,10 +827,12 @@ int main()
 
             for (int i = 0; i < army_size; i++)
             {
+                /* TODO
                 if (shoot_ship(x, y, i, oposite_ships[i]) != -1)
                 {
                     shoot = shoot_ship(x, y, i, oposite_ships[i]);
                 }
+                */
             }
 
             if (shoot != 0)
@@ -785,7 +847,9 @@ int main()
 
             for (int i = 0; i < army_size; i++)
             {
+                /* TODO
                 end_ship = end_ship + end_game(oposite_ships[i]);
+                */
             }
             cout << "-------" << end_ship << endl;
             char c = 0;
@@ -798,8 +862,9 @@ int main()
 
         return 0;
     }
-
+    
     ///////////////////////////////////////////
+    
     if (answer == "one")
     {
         int end_ship = 0;
@@ -866,6 +931,7 @@ int main()
 
                 system("CLS");
             }
+            
             while (player == 2)
             {
                 cout << "PLAYER 2" << endl;
@@ -931,7 +997,10 @@ int main()
         return 0;
 
     }
+    
+    return 0;
 }
+
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
 

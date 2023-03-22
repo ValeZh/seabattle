@@ -1,2 +1,29 @@
 ﻿  SeabattleUpgradeVs.cpp
-  SeabattleUpgradeVs.vcxproj -> d:\WinUsers\Lera\Documents\seabattle\SeabattleUpgradeVs\x64\Debug\SeabattleUpgradeVs.exe
+d:\WinUsers\Lera\Documents\seabattle\SeabattleUpgradeVs\SeabattleUpgradeVs.cpp(880,40): error C2676: binary '[': 'std::list<Ship *,std::allocator<Ship *>>' does not define this operator or a conversion to a type acceptable to the predefined operator
+d:\WinUsers\Lera\Documents\seabattle\SeabattleUpgradeVs\SeabattleUpgradeVs.cpp(880,21): error C2664: 'int put_ship(Ship *)': cannot convert argument 1 from 'int' to 'Ship *'
+d:\WinUsers\Lera\Documents\seabattle\SeabattleUpgradeVs\SeabattleUpgradeVs.cpp(880,30): message : Conversion from integral type to pointer type requires reinterpret_cast, C-style cast or parenthesized function-style cast
+d:\WinUsers\Lera\Documents\seabattle\SeabattleUpgradeVs\SeabattleUpgradeVs.cpp(373,5): message : see declaration of 'put_ship'
+d:\WinUsers\Lera\Documents\seabattle\SeabattleUpgradeVs\SeabattleUpgradeVs.cpp(880,21): message : while trying to match the argument list '(int)'
+d:\WinUsers\Lera\Documents\seabattle\SeabattleUpgradeVs\SeabattleUpgradeVs.cpp(906,60): error C2676: binary '[': 'std::list<Ship *,std::allocator<Ship *>>' does not define this operator or a conversion to a type acceptable to the predefined operator
+d:\WinUsers\Lera\Documents\seabattle\SeabattleUpgradeVs\SeabattleUpgradeVs.cpp(906,25): error C2660: 'shoot_ship': function does not take 3 arguments
+d:\WinUsers\Lera\Documents\seabattle\SeabattleUpgradeVs\SeabattleUpgradeVs.cpp(509,5): message : see declaration of 'shoot_ship'
+d:\WinUsers\Lera\Documents\seabattle\SeabattleUpgradeVs\SeabattleUpgradeVs.cpp(906,25): message : while trying to match the argument list '(int, int, int)'
+d:\WinUsers\Lera\Documents\seabattle\SeabattleUpgradeVs\SeabattleUpgradeVs.cpp(908,68): error C2676: binary '[': 'std::list<Ship *,std::allocator<Ship *>>' does not define this operator or a conversion to a type acceptable to the predefined operator
+d:\WinUsers\Lera\Documents\seabattle\SeabattleUpgradeVs\SeabattleUpgradeVs.cpp(908,33): error C2660: 'shoot_ship': function does not take 3 arguments
+d:\WinUsers\Lera\Documents\seabattle\SeabattleUpgradeVs\SeabattleUpgradeVs.cpp(509,5): message : see declaration of 'shoot_ship'
+d:\WinUsers\Lera\Documents\seabattle\SeabattleUpgradeVs\SeabattleUpgradeVs.cpp(908,33): message : while trying to match the argument list '(int, int, int)'
+d:\WinUsers\Lera\Documents\seabattle\SeabattleUpgradeVs\SeabattleUpgradeVs.cpp(925,67): error C2676: binary '[': 'std::list<Ship *,std::allocator<Ship *>>' does not define this operator or a conversion to a type acceptable to the predefined operator
+d:\WinUsers\Lera\Documents\seabattle\SeabattleUpgradeVs\SeabattleUpgradeVs.cpp(941,48): error C2676: binary '[': 'std::list<Ship *,std::allocator<Ship *>>' does not define this operator or a conversion to a type acceptable to the predefined operator
+d:\WinUsers\Lera\Documents\seabattle\SeabattleUpgradeVs\SeabattleUpgradeVs.cpp(941,21): error C2664: 'int put_ship(Ship *)': cannot convert argument 1 from 'int' to 'Ship *'
+d:\WinUsers\Lera\Documents\seabattle\SeabattleUpgradeVs\SeabattleUpgradeVs.cpp(941,30): message : Conversion from integral type to pointer type requires reinterpret_cast, C-style cast or parenthesized function-style cast
+d:\WinUsers\Lera\Documents\seabattle\SeabattleUpgradeVs\SeabattleUpgradeVs.cpp(373,5): message : see declaration of 'put_ship'
+d:\WinUsers\Lera\Documents\seabattle\SeabattleUpgradeVs\SeabattleUpgradeVs.cpp(941,21): message : while trying to match the argument list '(int)'
+d:\WinUsers\Lera\Documents\seabattle\SeabattleUpgradeVs\SeabattleUpgradeVs.cpp(967,52): error C2676: binary '[': 'std::list<Ship *,std::allocator<Ship *>>' does not define this operator or a conversion to a type acceptable to the predefined operator
+d:\WinUsers\Lera\Documents\seabattle\SeabattleUpgradeVs\SeabattleUpgradeVs.cpp(967,25): error C2660: 'shoot_ship': function does not take 3 arguments
+d:\WinUsers\Lera\Documents\seabattle\SeabattleUpgradeVs\SeabattleUpgradeVs.cpp(509,5): message : see declaration of 'shoot_ship'
+d:\WinUsers\Lera\Documents\seabattle\SeabattleUpgradeVs\SeabattleUpgradeVs.cpp(967,25): message : while trying to match the argument list '(int, int, int)'
+d:\WinUsers\Lera\Documents\seabattle\SeabattleUpgradeVs\SeabattleUpgradeVs.cpp(969,60): error C2676: binary '[': 'std::list<Ship *,std::allocator<Ship *>>' does not define this operator or a conversion to a type acceptable to the predefined operator
+d:\WinUsers\Lera\Documents\seabattle\SeabattleUpgradeVs\SeabattleUpgradeVs.cpp(969,33): error C2660: 'shoot_ship': function does not take 3 arguments
+d:\WinUsers\Lera\Documents\seabattle\SeabattleUpgradeVs\SeabattleUpgradeVs.cpp(509,5): message : see declaration of 'shoot_ship'
+d:\WinUsers\Lera\Documents\seabattle\SeabattleUpgradeVs\SeabattleUpgradeVs.cpp(969,33): message : while trying to match the argument list '(int, int, int)'
+d:\WinUsers\Lera\Documents\seabattle\SeabattleUpgradeVs\SeabattleUpgradeVs.cpp(986,59): error C2676: binary '[': 'std::list<Ship *,std::allocator<Ship *>>' does not define this operator or a conversion to a type acceptable to the predefined operator
