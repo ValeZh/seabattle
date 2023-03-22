@@ -814,27 +814,32 @@ int main()
             printboard();
             end_ship = 0;
             int shoot = 0;
+
+            ///////////////
             cout << "Break ship.Write x y for " << endl;
             
             cin >> alf;
             cin >> y;
-            
+            ///////////////////
+
             xy_validate(alf, y);
 
             x = alf - 97;
-            x;
             y--;
 
+            ///////////////// oposite_ships
             for (int i = 0; i < army_size; i++)
             {
-                /* TODO
+                
                 if (shoot_ship(x, y, i, oposite_ships[i]) != -1)
                 {
                     shoot = shoot_ship(x, y, i, oposite_ships[i]);
                 }
-                */
+                
             }
+            //////////////////////// shoot
 
+            /////////////////////// shoot /////
             if (shoot != 0)
             {
                 battlefield_oppon[x][y] = shoot + '0';
@@ -844,7 +849,10 @@ int main()
             {
                 battlefield_oppon[x][y] = '#';
             }
+            /////////////////////////////
 
+            
+            ///////////////
             for (int i = 0; i < army_size; i++)
             {
                 /* TODO
@@ -855,6 +863,7 @@ int main()
             char c = 0;
             wait_enter();
             system("CLS");
+            //////////////////////////////
 
         } while (end_ship != 0);
 
@@ -872,19 +881,22 @@ int main()
         do {
             while (player == 1)
             {
+                ////////////////////////////////
                 cout << "PLAYER 1" << endl;
                 clean_board();
 
                 for (int i = 0; i < army_size; i++)
                 {
-                    put_ship(i, ships[i]);
+                    put_ship(ships[i]);
                 }
-
                 printboard();
+                /////////////////////////////////////
+
                 end_ship = 0;
                 int shoot = 0;
                 cout << "Break ship.Write x y for " << endl;
 
+                /////////////
                 while (true)
                 {
                     cin >> alf;
@@ -894,13 +906,15 @@ int main()
                         break;
                     }
                     cout << "invalid" << endl;
-                };
+                }
 
                 x = alf - 97;
-                x;
                 y--;
-                player = 2;
+                ////////////////////////////
 
+
+                player = 2;
+                ///////////////////////////
                 for (int i = 0; i < army_size; i++)
                 {
                     if (shoot_ship(x, y, i, oposite_ships[i]) != -1)
@@ -908,7 +922,9 @@ int main()
                         shoot = shoot_ship(x, y, i, oposite_ships[i]);
                     }
                 }
+                //////////////////////////////
 
+                ///////////////////////////
                 if (shoot != 0)
                 {
                     battlefield_oppon[x][y] = shoot + '0';
@@ -919,7 +935,9 @@ int main()
                 {
                     battlefield_oppon[x][y] = '#';
                 }
+                /////////////////////////////////
 
+                //////////////////////////////
                 for (int i = 0; i < army_size; i++)
                 {
                     end_ship = end_ship + end_game(oposite_ships[i]);
@@ -930,17 +948,19 @@ int main()
                 wait_enter();
 
                 system("CLS");
+                ////////////////////////////
             }
             
+            ///////////////////////////////////
             while (player == 2)
             {
                 cout << "PLAYER 2" << endl;
                 clean_board();
                 for (int i = 0; i < army_size; i++)
                 {
-                    put_ship(i, oposite_ships[i]);
+                    put_ship(oposite_ships[i]);
                 }
-
+                
                 printboard(1);
                 end_ship = 0;
                 int shoot = 0;
@@ -956,7 +976,7 @@ int main()
                         break;
                     }
                     cout << "invalid" << endl;
-                };
+                }
 
                 x = alf - 97;
                 x;
@@ -992,6 +1012,7 @@ int main()
                 wait_enter();
                 system("CLS");
             }
+            ///////////////////
         } while (end_ship != 0);
         cout << "YOU WIN" << endl;
         return 0;
