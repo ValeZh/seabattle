@@ -18,9 +18,15 @@
     <ClCompile Include="SeabattleUpgradeVs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="firstfunc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Forfirstfunc.h">
+    <ClInclude Include="Forfirstclass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="firstfunc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

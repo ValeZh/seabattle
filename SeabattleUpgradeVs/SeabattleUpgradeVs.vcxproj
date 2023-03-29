@@ -127,10 +127,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="firstfunc.cpp" />
     <ClCompile Include="SeabattleUpgradeVs.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Forfirstfunc.h" />
+    <ClInclude Include="firstfunc.h" />
+    <ClInclude Include="Forfirstclass.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
