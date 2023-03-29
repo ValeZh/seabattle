@@ -129,6 +129,9 @@
   <ItemGroup>
     <ClCompile Include="SeabattleUpgradeVs.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Forfirstfunc.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

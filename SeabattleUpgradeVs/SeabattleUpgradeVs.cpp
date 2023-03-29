@@ -10,6 +10,7 @@
 #include <fstream>
 #include <time.h>
 #include <list>
+#include <Forfirstfunc.h>
 
 //#define _CRTDBG_MAP_ALLOC
 //#include <stdlib.h>
@@ -23,6 +24,12 @@ using namespace std;
 char battlefield[10][10];
 char battlefield2[10][10];
 char battlefield_oppon[10][10];
+
+struct Bufferxy {
+    char alf;
+    int y,x;
+
+};
 
 class Paluba {
 public:
@@ -506,7 +513,7 @@ void clean_board()
 
 
 
-int shoot_ship(int x, int y, int i, Ship* ship)
+int shoot_ship(int x, int y, Ship* ship)
 {
     Paluba* pl = ship->first_paluba();
     while (pl != NULL) {
@@ -591,13 +598,15 @@ void validate_for_set(Ship* ships)
     
 }
 
-void play_validate(char alf, int y)
+void play_validate(Bufferxy* bufxy)
 {
     do
     {
-        cin >> alf;
-        cin >> y;
-    } while (xy_validate(alf, y) == false);
+        cin >> bufxy->alf;
+        cin >> bufxy->y;
+    } while (xy_validate(bufxy->alf, bufxy->y) == false);
+    bufxy->x = bufxy->alf - 97;
+    bufxy->y--;
 
 }
 
@@ -624,6 +633,7 @@ int main()
     ships.push_back(new Type_2(HORISONTAL));
     ships.push_back(new Type_3(HORISONTAL));
 
+    Bufferxy bufxy;
 
     //Ship* ships[army_size];
     //ships[0] = new Type_1(VERTICAL);
@@ -782,17 +792,19 @@ int main()
             if (answer == "random")
             {
                 clean_board();
-                /* TODO
-                for (int i = 0; i < army_size; i++)
+                list<Ship*>::iterator itr = ships.begin();
+                list<Ship*>::iterator end = ships.end();
+
+                for (; itr != end; itr++)
                 {
-                    random_ship(i, oposite_ships[i]);
+                    random_ship(*itr);
                 }
                 clean_board();
-                for (int i = 0; i < army_size; i++)
-                {
-                    put_ship(i, ships[i]);
-                }
-                */
+           for (; itr != end; itr++)
+            {
+                put_ship(*itr);
+            }
+            printboard();
             }
             break;
         }
@@ -818,22 +830,23 @@ int main()
             ///////////////
             cout << "Break ship.Write x y for " << endl;
             
-            cin >> alf;
-            cin >> y;
+            cin >> bufxy.alf;
+            cin >> bufxy.y;
             ///////////////////
 
-            xy_validate(alf, y);
-
-            x = alf - 97;
-            y--;
+            play_validate(&bufxy);
 
             ///////////////// oposite_ships
-            for (int i = 0; i < army_size; i++)
+
+            list<Ship*>::iterator itr = ships.begin();
+            list<Ship*>::iterator end = ships.end();
+
+            for (; itr != end; itr++)
             {
                 
-                if (shoot_ship(x, y, i, oposite_ships[i]) != -1)
+                if (shoot_ship(bufxy.x, bufxy.y, *itr) != -1)
                 {
-                    shoot = shoot_ship(x, y, i, oposite_ships[i]);
+                    shoot = shoot_ship(bufxy.x, bufxy.y, *itr);
                 }
                 
             }
@@ -842,22 +855,21 @@ int main()
             /////////////////////// shoot /////
             if (shoot != 0)
             {
-                battlefield_oppon[x][y] = shoot + '0';
+                battlefield_oppon[bufxy.x][bufxy.y] = shoot + '0';
                 cout << "You shoot" << endl;
             }
             else
             {
-                battlefield_oppon[x][y] = '#';
+                battlefield_oppon[bufxy.x][bufxy.y] = '#';
             }
             /////////////////////////////
 
             
             ///////////////
-            for (int i = 0; i < army_size; i++)
+            list<Ship*>::iterator itr = ships.begin();
+            for (; itr != end; itr++)
             {
-                /* TODO
-                end_ship = end_ship + end_game(oposite_ships[i]);
-                */
+                end_ship = end_ship + end_game(*itr);
             }
             cout << "-------" << end_ship << endl;
             char c = 0;
@@ -883,11 +895,13 @@ int main()
             {
                 ////////////////////////////////
                 cout << "PLAYER 1" << endl;
+                list<Ship*>::iterator itr = ships.begin();
+                list<Ship*>::iterator end = ships.end();
                 clean_board();
 
-                for (int i = 0; i < army_size; i++)
+                for (; itr != end; itr++)
                 {
-                    put_ship(ships[i]);
+                    put_ship(*itr);
                 }
                 printboard();
                 /////////////////////////////////////
@@ -897,30 +911,23 @@ int main()
                 cout << "Break ship.Write x y for " << endl;
 
                 /////////////
-                while (true)
-                {
-                    cin >> alf;
-                    cin >> y;
-                    if (y > 0 && y < 11 && alf > 96 && alf < 107)
-                    {
-                        break;
-                    }
-                    cout << "invalid" << endl;
-                }
-
-                x = alf - 97;
-                y--;
+                play_validate(&bufxy);
                 ////////////////////////////
 
 
                 player = 2;
                 ///////////////////////////
-                for (int i = 0; i < army_size; i++)
+                list<Ship*>::iterator itr = ships.begin();
+                list<Ship*>::iterator end = ships.end();
+
+                for (; itr != end; itr++)
                 {
-                    if (shoot_ship(x, y, i, oposite_ships[i]) != -1)
+
+                    if (shoot_ship(bufxy.x, bufxy.y, *itr) != -1)
                     {
-                        shoot = shoot_ship(x, y, i, oposite_ships[i]);
+                        shoot = shoot_ship(bufxy.x, bufxy.y, *itr);
                     }
+
                 }
                 //////////////////////////////
 
