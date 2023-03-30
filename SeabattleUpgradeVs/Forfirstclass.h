@@ -22,7 +22,11 @@ public:
     int x;
     int y;
     bool lives;
-    Paluba() { x = -1; y = -1; lives = false; }
+    Paluba() { 
+        x = -1; 
+        y = -1; 
+        lives = false;
+    }
 };
 
 enum Direction
@@ -209,6 +213,7 @@ public:
     Paluba* first_paluba() {
         current_paluba = 0;
         return paluba;
+
     }
     Paluba* next_paluba() {
         if (current_paluba >= 1)
@@ -225,6 +230,7 @@ class Type_3 : public MultyPalub {
 private:
     int current_paluba;
     Paluba paluba[3];
+
 
 public:
     Type_3(Direction d) : MultyPalub(d) { current_paluba = 0; }
