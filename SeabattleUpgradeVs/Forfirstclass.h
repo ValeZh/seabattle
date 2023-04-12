@@ -138,7 +138,7 @@ public:
         }
     }
     virtual void rotate() {
-        dir = (dir == HORISONTAL) ? VERTICAL : HORISONTAL;
+        dir = (dir == HORISONTAL ? VERTICAL : HORISONTAL);
         Paluba* pl = first_paluba();
         set_first_paluba(pl->x, pl->y);
     };

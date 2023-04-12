@@ -1,8 +1,7 @@
 ﻿  firstfunc.cpp
-  SeabattleUpgradeVs.cpp
   Generating code
-  296 of 306 functions (96.7%) were compiled, the rest were copied from previous compilation.
-    7 functions were new in current compilation
+  9 of 307 functions ( 2.9%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
     4 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   SeabattleUpgradeVs.vcxproj -> d:\WinUsers\Lera\Documents\seabattle\SeabattleUpgradeVs\x64\Release\SeabattleUpgradeVs.exe
