@@ -82,6 +82,7 @@ bool validate(int x, int y)
 {
     // massiv v kotorom vse koordinati vokrug
     int area[9][2];
+
     area[0][0] = x;
     area[0][1] = y;
     area[1][0] = x + 1;
@@ -664,7 +665,7 @@ void for_one_comp(list<Ship*> ships, list<Ship*> oposite_ships, Bufferxy& bufxy)
             ///////////////////////////
             player = game_shoot(bufxy, shoot, player);
             /////////////////////////////////
-
+            
             //////////////////////////////
             end_ship = game_end(oposite_ships);
             ////////////////////////////
