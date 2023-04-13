@@ -299,12 +299,28 @@ void validate_for_set(Ship* ships)
     int x;
     char alf;
     cout << "Write x y for " << ships->label() << " " << ships->id() << endl;
-
-    do
+    while (true)
     {
-        cin >> alf;
-        cin >> y;
-    } while (xy_validate(alf, y) == false);
+        string buffer;
+        cin >> buffer;
+        if (buffer.length() == 1 && isalpha(buffer[0]) && tolower(buffer[0]) <= 'j') {
+            alf = buffer[0];
+            break;
+        }
+        cout << "Invalid value 1. Try again. It should be a letter.[a..j]" << endl;
+    }
+
+    while (true)
+    {
+        string buffer;
+        cin >> buffer;
+        y = atoi(buffer.c_str());
+        if (y >= 1 && y <= 10) {
+            break;
+        }
+        cout << "Invalid value 2. It should be a number [1..10]" << endl;
+    }
+
     x = alf - 97;
     y--;
     ships->set_first_paluba(x, y);
@@ -312,11 +328,28 @@ void validate_for_set(Ship* ships)
 
 void play_validate(Bufferxy& bufxy)
 {
-    do
+    while (true)
     {
-        cin >> bufxy.alf;
-        cin >> bufxy.y;
-    } while (!xy_validate(bufxy.alf, bufxy.y));
+        string buffer;
+        cin >> buffer;
+        if (buffer.length() == 1 &&  isalpha(buffer[0]) && tolower(buffer[0]) <= 'j'){
+            bufxy.alf = buffer[0];
+            break;
+        }
+        cout << "Invalid value 1. Try again. It should be a letter.[a..j]" << endl;
+    }
+
+    while (true)
+    {
+        string buffer;
+        cin >> buffer;
+        bufxy.y = atoi(buffer.c_str());
+        if (bufxy.y >= 1 && bufxy.y <= 10) {
+            break;
+        }
+        cout << "Invalid value 2. It should be a number [1..10]" << endl;
+    }
+
     bufxy.x = bufxy.alf - CHAR_A;
     bufxy.y--;
 }
@@ -364,8 +397,9 @@ bool game_coord(list<Ship*> ships)
     {
         put_ship(*itr);
     }
-    return true;
     wait_enter();
+    return true;
+    
 }
 
 bool game_infoship(list<Ship*> ships)

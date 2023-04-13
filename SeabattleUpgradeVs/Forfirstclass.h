@@ -13,7 +13,8 @@ using namespace std;
 
 struct Bufferxy {
     char alf;
-    int y, x;
+    int y;
+    int x;
 
 };
 
