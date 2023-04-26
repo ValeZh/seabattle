@@ -3,10 +3,7 @@
 #pragma warning( push )
 #pragma warning( disable : 4996)
 
-int const NUM_CELLS = 10;
-int const ZERO_CHAR = 48;
-int const FAIL_BOOM = -1;
-int const CHAR_A = 97;
+
 char battlefield[10][10];
 char battlefield2[10][10];
 char battlefield_oppon[10][10];
@@ -81,7 +78,7 @@ void printboard(int user)
 bool validate(int x, int y)
 {
     // massiv v kotorom vse koordinati vokrug
-    int area[9][2];
+    int area[9][2] = {};
 
     area[0][0] = x;
     area[0][1] = y;
@@ -300,9 +297,9 @@ void validate_for_set(Ship* ships)
     int x;
     char alf;
     cout << "Write x y for " << ships->label() << " " << ships->id() << endl;
+    string buffer;
     while (true)
     {
-        string buffer;
         cin >> buffer;
         if (buffer.length() == 1 && isalpha(buffer[0]) && tolower(buffer[0]) <= 'j') {
             alf = buffer[0];
@@ -313,7 +310,6 @@ void validate_for_set(Ship* ships)
 
     while (true)
     {
-        string buffer;
         cin >> buffer;
         y = atoi(buffer.c_str());
         if (y >= 1 && y <= 10) {
@@ -329,9 +325,9 @@ void validate_for_set(Ship* ships)
 
 void play_validate(Bufferxy& bufxy)
 {
+    string buffer;
     while (true)
     {
-        string buffer;
         cin >> buffer;
         if (buffer.length() == 1 &&  isalpha(buffer[0]) && tolower(buffer[0]) <= 'j'){
             bufxy.alf = buffer[0];
@@ -342,7 +338,6 @@ void play_validate(Bufferxy& bufxy)
 
     while (true)
     {
-        string buffer;
         cin >> buffer;
         bufxy.y = atoi(buffer.c_str());
         if (bufxy.y >= 1 && bufxy.y <= 10) {
@@ -546,8 +541,6 @@ int game_end(list<Ship*> oposite_ships)
 
 bool game_put_ship_for2(list<Ship*> ships, int player)
 {
-    clean_board();
-
     for (list<Ship*>::iterator itr = ships.begin(); itr != ships.end(); itr++)
     {
         put_ship(*itr);

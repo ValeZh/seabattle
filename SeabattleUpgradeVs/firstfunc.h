@@ -4,7 +4,6 @@
 #pragma warning( push )
 #pragma warning( disable : 4996)
 
-
 void printboard(int user = 1);
 bool validate(int x, int y);
 int put_ship(Ship* ship);
